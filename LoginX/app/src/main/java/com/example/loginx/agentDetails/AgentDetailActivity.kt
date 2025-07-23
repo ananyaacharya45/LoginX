@@ -10,7 +10,7 @@ import org.json.JSONObject
 import java.net.HttpURLConnection
 import java.net.URL
 
-class AgentActivity : ComponentActivity() {
+class AgentDetailActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -23,7 +23,7 @@ class AgentActivity : ComponentActivity() {
 
 }
 
-suspend fun fetchAgents(agentUuid: String): List<AgentDetail> = withContext(Dispatchers.IO) {
+suspend fun fetchAgent(agentUuid: String): AgentDetail = withContext(Dispatchers.IO) {
     val url = URL("https://valorant-api.com/v1/agents/" + agentUuid)
     val connection = url.openConnection() as HttpURLConnection
     connection.requestMethod = "GET"
@@ -31,20 +31,15 @@ suspend fun fetchAgents(agentUuid: String): List<AgentDetail> = withContext(Disp
 
     val response = connection.inputStream.bufferedReader().readText()
     val jsonObject = JSONObject(response)
-    val dataArray = jsonObject.getJSONArray("data")
-    val agents = mutableListOf<AgentDetail>()
-    for (i in 0 until dataArray.length()) {
-        val jsonObject = dataArray.getJSONObject(i)
-        val agent = AgentDetail(
-            uuid = jsonObject.getString("uuid"),
-            displayName = jsonObject.getString("displayName"),
-            description = jsonObject.getString("description"),
-            developerName = jsonObject.getString("developerName"),
-            displayIcon = "",
-            role = "",
-        )
-        agents.add(agent)
-    }
+    val dataObject = jsonObject.getJSONObject("data")
+    val agent = AgentDetail(
+        uuid = dataObject.getString("uuid"),
+        displayName = dataObject.getString("displayName"),
+        description = dataObject.getString("description"),
+        developerName = dataObject.getString("developerName"),
+        displayIcon = dataObject.getString("displayIcon"),
+        role = dataObject.getJSONObject("role").getString("displayName "),
+    )
 
-    return@withContext agents
+    return@withContext agent
 }

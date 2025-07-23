@@ -28,16 +28,25 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.lazy.items
 
 @Composable
-fun AgentList(agentUuid:String) {
-    var agents by remember { mutableStateOf<List<AgentDetail>>(emptyList()) }
+fun AgentList(agentUuid: String) {
+    val initAgent = AgentDetail(
+        "1", "John Doe", "test", "",
+        displayIcon = "",
+        role = ""
+    )
+    var agent by remember {
+        mutableStateOf<AgentDetail>(
+            initAgent
+        )
+    }
     var isLoading by remember { mutableStateOf(true) }
     var errorMessage by remember { mutableStateOf<String?>(null) }
     val context = LocalContext.current
 
     LaunchedEffect(Unit) {
         try {
-            val fetchedAgents = fetchAgents(agentUuid)
-            agents = fetchedAgents
+            val fetchedAgent = fetchAgent(agentUuid)
+            agent = fetchedAgent
             isLoading = false
         } catch (e: Exception) {
             errorMessage = e.message
@@ -87,12 +96,12 @@ fun AgentList(agentUuid:String) {
             }
 
             else -> {
-                LazyColumn(
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                Box(
+
                 ) {
-                    items(agents) { agent ->
-                        AgentItem(agent = agent)
-                    }
+
+                    AgentItem(agent = agent)
+
                 }
             }
         }
