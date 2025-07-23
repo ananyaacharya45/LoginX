@@ -1,4 +1,4 @@
-package com.example.loginx
+package com.example.loginx.welcome
 
 import android.content.Intent
 import androidx.compose.foundation.Image
@@ -23,6 +23,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.loginx.R
+import com.example.loginx.login.LoginActivity
 
 @Composable
 fun Welcome() {
@@ -76,7 +78,7 @@ fun Welcome() {
 
             Button(
                 onClick = {
-                    val intent = Intent(context, MainActivity::class.java)
+                    val intent = Intent(context, LoginActivity::class.java)
                     context.startActivity(intent)
                 },
                 modifier = Modifier

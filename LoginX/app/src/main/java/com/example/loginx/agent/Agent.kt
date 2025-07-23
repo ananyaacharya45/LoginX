@@ -1,4 +1,4 @@
-package com.example.loginx
+package com.example.loginx.agent
 
 data class Agent(
     val uuid: String,
@@ -6,5 +6,3 @@ data class Agent(
     val description: String,
     val developerName: String
 )
-
-

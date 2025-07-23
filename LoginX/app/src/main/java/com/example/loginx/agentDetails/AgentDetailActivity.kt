@@ -1,4 +1,4 @@
-package com.example.loginx
+package com.example.loginx.agentDetails
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -6,7 +6,6 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import org.json.JSONArray
 import org.json.JSONObject
 import java.net.HttpURLConnection
 import java.net.URL
@@ -15,16 +14,17 @@ class AgentActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        val agentUuid = intent.getStringExtra("AGENT_UUID")
         setContent {
-            AgentList()
+            AgentList(agentUuid.toString())
         }
     }
 
 
 }
 
-suspend fun fetchAgents(): List<Agent> = withContext(Dispatchers.IO) {
-    val url = URL("https://valorant-api.com/v1/agents")
+suspend fun fetchAgents(agentUuid: String): List<AgentDetail> = withContext(Dispatchers.IO) {
+    val url = URL("https://valorant-api.com/v1/agents/" + agentUuid)
     val connection = url.openConnection() as HttpURLConnection
     connection.requestMethod = "GET"
     connection.setRequestProperty("Content-Type", "application/json")
@@ -32,14 +32,16 @@ suspend fun fetchAgents(): List<Agent> = withContext(Dispatchers.IO) {
     val response = connection.inputStream.bufferedReader().readText()
     val jsonObject = JSONObject(response)
     val dataArray = jsonObject.getJSONArray("data")
-    val agents = mutableListOf<Agent>()
+    val agents = mutableListOf<AgentDetail>()
     for (i in 0 until dataArray.length()) {
         val jsonObject = dataArray.getJSONObject(i)
-        val agent = Agent(
+        val agent = AgentDetail(
             uuid = jsonObject.getString("uuid"),
             displayName = jsonObject.getString("displayName"),
             description = jsonObject.getString("description"),
-            developerName = jsonObject.getString("developerName")
+            developerName = jsonObject.getString("developerName"),
+            displayIcon = "",
+            role = "",
         )
         agents.add(agent)
     }
