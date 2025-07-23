@@ -26,6 +26,11 @@
             android:exported="true"
             android:theme="@style/Theme.LoginX">
         </activity>
+        <activity
+            android:name=".AgentActivity"
+            android:exported="true"
+            android:theme="@style/Theme.LoginX">
+        </activity>
     </application>
 
 </manifest>

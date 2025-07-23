@@ -1,5 +1,7 @@
 package com.example.loginx
 
+import android.content.Intent
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -26,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -35,6 +38,7 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun Login() {
+    val context = LocalContext.current
     var email by remember {
         mutableStateOf("")
     }
@@ -83,6 +87,9 @@ fun Login() {
 
             Button(
                 onClick = {
+                    val intent = Intent(context, AgentActivity::class.java)
+                    Log.d("INFO","AgentActivitystarted")
+                    context.startActivity(intent)
                 },
                 modifier = Modifier
                     .padding(bottom = 16.dp),
