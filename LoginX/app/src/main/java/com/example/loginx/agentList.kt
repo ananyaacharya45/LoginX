@@ -41,15 +41,15 @@ import androidx.compose.foundation.lazy.items
 
 @Composable
 fun AgentList() {
-    var posts by remember { mutableStateOf<List<Agent>>(emptyList()) }
+    var agents by remember { mutableStateOf<List<Agent>>(emptyList()) }
     var isLoading by remember { mutableStateOf(true) }
     var errorMessage by remember { mutableStateOf<String?>(null) }
     val context = LocalContext.current
 
     LaunchedEffect(Unit) {
         try {
-            val fetchedPosts = fetchPosts()
-            posts = fetchedPosts
+            val fetchedAgents = fetchAgents()
+            agents = fetchedAgents
             isLoading = false
         } catch (e: Exception) {
             errorMessage = e.message
@@ -64,7 +64,7 @@ fun AgentList() {
             .padding(16.dp)
     ) {
         Text(
-            text = "Posts from API",
+            text = "Agents from API",
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(bottom = 16.dp)
@@ -81,7 +81,7 @@ fun AgentList() {
                     ) {
                         CircularProgressIndicator()
                         Spacer(modifier = Modifier.height(16.dp))
-                        Text("Loading posts...")
+                        Text("Loading agents...")
                     }
                 }
             }
@@ -102,8 +102,8 @@ fun AgentList() {
                 LazyColumn(
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    items(posts) { post ->
-                        PostItem(post = post)
+                    items(agents) { agent ->
+                        AgentItem(agent = agent)
                     }
                 }
             }
@@ -113,7 +113,7 @@ fun AgentList() {
 }
 
 @Composable
-fun PostItem(post: Agent) {
+fun AgentItem(agent: Agent) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
@@ -122,7 +122,7 @@ fun PostItem(post: Agent) {
             modifier = Modifier.padding(16.dp)
         ) {
             Text(
-                text = post.title,
+                text = agent.displayName,
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.onSurface,
@@ -130,14 +130,14 @@ fun PostItem(post: Agent) {
             )
 
             Text(
-                text = post.body,
+                text = agent.description,
                 fontSize = 14.sp,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.padding(bottom = 8.dp)
             )
 
             Text(
-                text = "User ID: ${post.userId}",
+                text = "User ID: ${agent.uuid}",
                 fontSize = 12.sp,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 fontWeight = FontWeight.Light
