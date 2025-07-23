@@ -2,7 +2,6 @@ package com.example.loginx.welcome
 
 import android.content.Intent
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -30,75 +29,51 @@ import com.example.loginx.login.LoginActivity
 fun Welcome() {
     val context = LocalContext.current
 
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
     ) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(2f)
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-                painter = painterResource(id = R.drawable.background_curve1),
-                contentDescription = "Background Image",
-                modifier = Modifier.fillMaxSize(),
+                painter = painterResource(id = R.drawable.valorantsc),
+                contentDescription = "Valorant Image",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(2f),
                 contentScale = ContentScale.Crop
             )
         }
 
-        Box(
+        Button(
+            onClick = {
+                val intent = Intent(context, LoginActivity::class.java)
+                context.startActivity(intent)
+            },
             modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f)
-                .background(Color.White)
-                .padding(24.dp)
+                .align(Alignment.BottomEnd)
+                .padding(16.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = colorResource(R.color.black)
+            )
         ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(end = 80.dp),
-                verticalArrangement = Arrangement.Center
-            ) {
-                Text(
-                    text = "Welcome",
-                    fontWeight = FontWeight.Bold,
-                    color = Color.Black,
-                    modifier = Modifier.padding(bottom = 16.dp),
-                    fontSize = 28.sp
-                )
-
-                Text(
-                    text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.",
-                    color = Color.Gray,
-                    fontSize = 18.sp
-                )
-            }
-
-            Button(
-                onClick = {
-                    val intent = Intent(context, LoginActivity::class.java)
-                    context.startActivity(intent)
-                },
-                modifier = Modifier
-                    .align(Alignment.BottomEnd)
-                    .padding(bottom = 16.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = colorResource(R.color.peach_200)
-                )
-            ) {
-                Text(
-                    text = "Continue",
-                    color = Color.White,
-                    fontWeight = FontWeight.Medium,
-                    fontSize = 18.sp
-                )
-            }
-
+            Text(
+                text = "Continue",
+                color = Color.White,
+                fontWeight = FontWeight.Medium,
+                fontSize = 18.sp
+            )
         }
     }
 }
+
+
+
+
+
 
 
 

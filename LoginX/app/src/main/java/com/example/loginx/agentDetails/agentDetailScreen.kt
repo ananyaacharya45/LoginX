@@ -26,6 +26,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.lazy.items
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 
 @Composable
 fun AgentList(agentUuid: String) {
@@ -120,15 +122,15 @@ fun AgentItem(agent: AgentDetail) {
         ) {
             Text(
                 text = agent.displayName,
-                fontSize = 16.sp,
+                fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onSurface,
+                color = Color(0xFFFF0000),
                 modifier = Modifier.padding(bottom = 8.dp)
             )
 
             Text(
                 text = agent.description,
-                fontSize = 14.sp,
+                fontSize = 16.sp,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.padding(bottom = 8.dp)
             )

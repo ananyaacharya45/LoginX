@@ -2,6 +2,7 @@ package com.example.loginx.agent
 
 import android.content.Intent
 import android.widget.Toast
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -25,6 +26,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.graphics.Color
 import com.example.loginx.agentDetails.AgentDetailActivity
 
 @Composable
@@ -111,6 +114,7 @@ fun AgentItem(agent: Agent) {
 
         },
         modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(12.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
         Column(
@@ -118,9 +122,9 @@ fun AgentItem(agent: Agent) {
         ) {
             Text(
                 text = agent.displayName,
-                fontSize = 16.sp,
+                fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onSurface,
+                color = Color(0xFFFF0000),
                 modifier = Modifier.padding(bottom = 8.dp)
             )
 

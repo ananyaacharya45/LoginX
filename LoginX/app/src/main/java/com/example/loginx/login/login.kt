@@ -48,7 +48,7 @@ fun Login() {
         modifier = Modifier.fillMaxSize(),
     ) {
         Image(
-            painter = painterResource(id = R.drawable.background_curve1),
+            painter = painterResource(id = R.drawable.valosc),
             contentDescription = "Login Image",
             modifier = Modifier
                 .fillMaxSize()
@@ -93,7 +93,7 @@ fun Login() {
                 modifier = Modifier
                     .padding(bottom = 16.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = colorResource(R.color.peach_200)
+                    containerColor = colorResource(R.color.black)
                 )
             ) {
                 Text(
@@ -108,7 +108,7 @@ fun Login() {
             TextButton(onClick = {}) {
                 Text(
                     text = "Forgot Password?",
-                    color = colorResource(R.color.peach_200)
+                    color = colorResource(R.color.black)
                 )
             }
             Spacer(modifier = Modifier.height(24.dp))
