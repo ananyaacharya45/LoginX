@@ -38,7 +38,7 @@ suspend fun fetchAgent(agentUuid: String): AgentDetail = withContext(Dispatchers
         description = dataObject.getString("description"),
         developerName = dataObject.getString("developerName"),
         displayIcon = dataObject.getString("displayIcon"),
-        role = dataObject.getJSONObject("role").getString("displayName "),
+        role = dataObject.getJSONObject("role").getString("displayName"),
     )
 
     return@withContext agent
