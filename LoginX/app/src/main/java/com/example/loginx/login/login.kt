@@ -6,6 +6,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -36,7 +37,9 @@ import com.example.loginx.agent.AgentActivity
 import com.example.loginx.R
 
 @Composable
-fun Login() {
+fun Login(onLoginClick: () -> Unit = {}) {
+
+
     val context = LocalContext.current
     var email by remember {
         mutableStateOf("")
@@ -44,99 +47,126 @@ fun Login() {
     var password by remember {
         mutableStateOf("")
     }
-    Column(
-        modifier = Modifier.fillMaxSize(),
+    val backgroundPainter = painterResource(id = R.drawable.login2)
+    Box(
+        modifier = Modifier.fillMaxSize()
     ) {
+
         Image(
-            painter = painterResource(id = R.drawable.valosc),
-            contentDescription = "Login Image",
+            painter = backgroundPainter,
+            contentDescription = "BgImage",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxSize()
+        )
+        Box(
             modifier = Modifier
                 .fillMaxSize()
-                .weight(1f),
-            contentScale = ContentScale.FillBounds
-
+                .background(Color.Black.copy(alpha = 0.5f))
         )
-        Column(
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(2f)
-                .background(Color.White)
-        ) {
-            Text(text = "Welcome Back", fontSize = 28.sp, fontWeight = FontWeight.Bold)
-            Spacer(modifier = Modifier.height(5.dp))
 
-            Text(text = "Login to your account")
-            Spacer(modifier = Modifier.height(20.dp))
+        {
 
-            OutlinedTextField(value = email, onValueChange = {
-                email = it
-            }, label = {
-                Text(text = "Email Address")
-            })
-            Spacer(modifier = Modifier.height(20.dp))
-
-            OutlinedTextField(value = password, onValueChange = {
-                password = it
-            }, label = {
-                Text(text = "Password")
-            }, visualTransformation = PasswordVisualTransformation())
-            Spacer(modifier = Modifier.height(20.dp))
-
-            Button(
-                onClick = {
-                    val intent = Intent(context, AgentActivity::class.java)
-                    Log.d("INFO","AgentActivitystarted")
-                    context.startActivity(intent)
-                },
+            Column(
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
-                    .padding(bottom = 16.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = colorResource(R.color.black)
-                )
+                    .fillMaxWidth()
+                    .padding(28.dp)
             ) {
-                Text(
-                    text = "Login",
-                    color = Color.White,
-                    fontWeight = FontWeight.Medium,
-                    fontSize = 18.sp
-                )
-            }
-            Spacer(modifier = Modifier.height(6.dp))
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.applogo),
+                        contentDescription = "Logo",
+                        modifier = Modifier
+                            .size(48.dp)
+                            .padding(end = 8.dp)
+                    )
+                    Spacer(modifier = Modifier.height(200.dp))
 
-            TextButton(onClick = {}) {
-                Text(
-                    text = "Forgot Password?",
-                    color = colorResource(R.color.black)
-                )
-            }
-            Spacer(modifier = Modifier.height(24.dp))
+                    Text(
+                        text = "Valorant",
+                        fontSize = 28.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White
+                    )
+                }
+                Spacer(modifier = Modifier.height(5.dp))
 
-            Text(text = "Or sign in with")
-            Spacer(modifier = Modifier.height(24.dp))
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceEvenly
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.a), contentDescription = "Google",
+
+
+                OutlinedTextField(value = email, onValueChange = {
+                    email = it
+                }, label = {
+                    Text(text = "Email Address", color = Color.White)
+                })
+                Spacer(modifier = Modifier.height(20.dp))
+
+                OutlinedTextField(value = password, onValueChange = {
+                    password = it
+                }, label = {
+                    Text(text = "Password", color = Color.White)
+                }, visualTransformation = PasswordVisualTransformation())
+                Spacer(modifier = Modifier.height(20.dp))
+
+                Button(
+                    onClick = {
+                        val intent = Intent(context, AgentActivity::class.java)
+                        Log.d("INFO", "AgentActivitystarted")
+                        context.startActivity(intent)
+                    },
                     modifier = Modifier
-                        .size(60.dp)
-                        .clickable {
-                        })
-                Image(
-                    painter = painterResource(id = R.drawable.b), contentDescription = "Microsoft",
-                    modifier = Modifier
-                        .size(60.dp)
-                        .clickable {
-                        })
-                Image(
-                    painter = painterResource(id = R.drawable.c), contentDescription = "Facebook",
-                    modifier = Modifier
-                        .size(60.dp)
-                        .clickable {
-                        })
+                        .padding(bottom = 16.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = colorResource(R.color.red)
+                    )
+                ) {
+                    Text(
+                        text = "Login",
+                        color = Color.White,
+                        fontWeight = FontWeight.Medium,
+                        fontSize = 18.sp
+                    )
+                }
+                Spacer(modifier = Modifier.height(6.dp))
+
+                TextButton(onClick = {}) {
+                    Text(
+                        text = "Forgot Password?",
+                        color = Color.White
+                    )
+                }
+                Spacer(modifier = Modifier.height(24.dp))
+
+                Text(text = "Or sign in with")
+                Spacer(modifier = Modifier.height(24.dp))
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceEvenly
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.a), contentDescription = "Google",
+                        modifier = Modifier
+                            .size(60.dp)
+                            .clickable {
+                            })
+                    Image(
+                        painter = painterResource(id = R.drawable.b),
+                        contentDescription = "Microsoft",
+                        modifier = Modifier
+                            .size(60.dp)
+                            .clickable {
+                            })
+                    Image(
+                        painter = painterResource(id = R.drawable.c),
+                        contentDescription = "Facebook",
+                        modifier = Modifier
+                            .size(60.dp)
+                            .clickable {
+                            })
+                }
             }
         }
     }

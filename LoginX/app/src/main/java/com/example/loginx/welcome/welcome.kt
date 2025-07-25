@@ -39,7 +39,7 @@ fun Welcome() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-                painter = painterResource(id = R.drawable.valorantsc),
+                painter = painterResource(id = R.drawable.vw),
                 contentDescription = "Valorant Image",
                 modifier = Modifier
                     .fillMaxWidth()
