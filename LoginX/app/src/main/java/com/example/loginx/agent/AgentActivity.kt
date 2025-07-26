@@ -38,6 +38,7 @@ suspend fun fetchAgents(): List<Agent> = withContext(Dispatchers.IO) {
             uuid = jsonObject.getString("uuid"),
             displayName = jsonObject.getString("displayName"),
             description = jsonObject.getString("description"),
+            displayIcon = jsonObject.getString("displayIconSmall"),
             developerName = jsonObject.getString("developerName")
         )
         agents.add(agent)
