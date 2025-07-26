@@ -30,23 +30,14 @@ fun Welcome() {
     val context = LocalContext.current
 
     Box(
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
-        Column(
+        Image(
+            painter = painterResource(id = R.drawable.vw),
+            contentDescription = "Valorant Image",
             modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.vw),
-                contentDescription = "Valorant Image",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(2f),
-                contentScale = ContentScale.Crop
-            )
-        }
+            contentScale = ContentScale.Crop
+        )
 
         Button(
             onClick = {
@@ -54,10 +45,10 @@ fun Welcome() {
                 context.startActivity(intent)
             },
             modifier = Modifier
-                .align(Alignment.BottomEnd)
-                .padding(16.dp),
+                .align(Alignment.BottomCenter)
+                .padding(bottom = 48.dp),
             colors = ButtonDefaults.buttonColors(
-                containerColor = colorResource(R.color.black)
+                containerColor = colorResource(R.color.red)
             )
         ) {
             Text(
@@ -69,6 +60,7 @@ fun Welcome() {
         }
     }
 }
+
 
 
 
